@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For u Asteria</title>
+    
+    <!-- Google Fonts: Montserrat untuk Judul, Lora untuk Teks -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Palet Warna & Konfigurasi Dasar --- */
+        :root {
+            --bluebell: #A2A2D0;
+            --cream: #F5F5DC;
+            --white: #FFFFFF;
+            --gold: #FFD700;
+            --dark-gray: #333333;
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Lora', serif;
+        }
+
+        /* --- Reset & Gaya Global --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--cream);
+            font-family: var(--font-body);
+            color: var(--dark-gray);
+            overflow-x: hidden; /* Mencegah scroll horizontal */
+        }
+
+        /* --- Latar Belakang Animasi Kelopak Bunga --- */
+        #petal-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Pastikan canvas ada di belakang konten */
+            pointer-events: none; /* Agar tidak bisa diklik */
+        }
+
+        /* --- Kontainer Utama --- */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            text-align: center;
+        }
+
+        /* --- Halaman Pembuka (Hero Section) --- */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-section h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            font-family: var(--font-heading);
+            background-color: var(--gold);
+            color: var(--dark-gray);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: #f7e26b;
+        }
+
+        /* --- Wrapper untuk Konten Kejutan --- */
+        #surprise-content {
+            display: none; /* Awalnya disembunyikan */
+        }
+
+        /* --- Gaya Umum untuk Setiap Bagian --- */
+        .content-section {
+            background-color: var(--white);
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: slideUpFadeIn 1s forwards;
+        }
+
+        .content-section h2 {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: var(--bluebell);
+        }
+
+        /* --- Playlist Lagu Spesial --- */
+        #playlist-section {
+            animation-delay: 0.2s;
+        }
+        .music-player-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* Aspect Ratio 16:9 */
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .music-player-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- Pesan Personal (Surat Digital) --- */
+        #letter-section {
+            animation-delay: 0.4s;
+        }
+        .letter-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.7s ease-in-out, opacity 0.5s ease;
+            opacity: 0;
+            text-align: left;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        .letter-content.open {
+            max-height: 1000px; /* Nilai besar agar konten muat */
+            opacity: 1;
+        }
+        .letter-button {
+            margin-top: 20px;
+            background-color: var(--bluebell);
+            color: var(--white);
+        }
+        .letter-button:hover {
+             background-color: #b9b9e0;
+        }
+
+        /* --- Halaman Penutup (Footer) --- */
+        footer {
+            padding: 40px 20px;
+            font-size: 1rem;
+            animation: fadeIn 2s 1s forwards;
+            opacity: 0;
+        }
+        .heart-icon {
+            display: inline-block;
+            color: var(--bluebell);
+            animation: pulse 1.5s infinite;
+        }
+
+        /* --- Animasi --- */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUpFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        /* --- Aturan Responsif untuk Mobile --- */
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            .content-section h2 {
+                font-size: 1.8rem;
+            }
+            .container {
+                padding: 20px 15px;
+            }
+             .content-section {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas untuk animasi kelopak bunga yang jatuh -->
+    <canvas id="petal-canvas"></canvas>
+
+    <div class="container">
+        <!-- 1. Halaman Pembuka (Hero Section) -->
+        <section class="hero-section" id="hero">
+            <!-- 
+                UBAH NAMA DI SINI: 
+                Ganti "[Nama Penerima]" dengan nama orang yang berulang tahun.
+            -->
+            <h1>Selamat Ulang Tahun, <br>Savina!</h1>
+            
+            <button class="cta-button" id="reveal-button">Pencet ini Kak</button>
+        </section>
+
+        <!-- Wrapper untuk semua konten kejutan -->
+        <div id="surprise-content">
+            <!-- 2. Playlist Lagu Spesial -->
+            <section class="content-section" id="playlist-section">
+                <h2>Playlist Spesial Untukmu</h2>
+                <div class="music-player-wrapper">
+                    <!-- 
+                        UBAH LINK PLAYLIST DI SINI:
+                        - Buka YouTube atau Spotify.
+                        - Cari playlist yang Anda inginkan.
+                        - Klik "Share" -> "Embed".
+                        - Salin kode `iframe` dan tempel di sini, atau cukup ganti URL di dalam `src="..."` di bawah ini.
+                        - Contoh di bawah ini menggunakan video lofi.
+                    -->
+                    <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/22Nd3GuO7sHopPjdKccRcq?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                </div>
+            </section>
+
+            <!-- 3. Pesan Personal dari Anda -->
+            <section class="content-section" id="letter-section">
+                <h2>Sebuah Surat untukmu, Asteria</h2>
+                <div class="letter-content" id="letter-content">
+                    <!-- 
+                        UBAH ISI SURAT DI SINI:
+                        Tulis pesan tulus Anda di antara tag <p> di bawah ini.
+                        Anda bisa menambahkan beberapa paragraf dengan tag <p> baru.
+                    -->
+                    <p>
+                        Hai Savina,
+                    </p>
+                    <p>
+                        Aku rayakan dan hadiahkan hari lahirmu dengan sederhana, Dengan menulis beberapa bait yang aku bisikan dari jauh.
+                    </p>
+                    <p>
+                        Dariku, semua doa terbaik akan selalu menemani langkahmu. Semoga manusia yang membuatku jatuh cinta ini, akan selalu dibersamai keberuntungan hidup dalam setiap perjalanannya. Semoga manusia indah ini, akan selalu dihiasi senyum bahagia disetiap harinya.
+Semua untukmu adalah yang terbaik, dan semoga akan tetap seperti itu.
+                    </p>
+                    <p>Untuk bintangku yang paling terang, semoga cahayanya tak pernah hilang.
+Dan Aku akan selalu mencintainya.</p>
+                    <p>
+                        Sekali lagi, Selamat ulang tahun bintang kecilku.
+                    </p>
+                    <br>
+                    <p>
+                        Dari Penyair Jalanan- <br>
+                    </p>
+                </div>
+                <button class="cta-button letter-button" id="read-letter-button">Baca Surat</button>
+            </section>
+        </div>
+
+        <!-- 4. Halaman Penutup (Footer) -->
+        <footer>
+            <p>Dibuat dengan <span class="heart-icon">❤️</span> untukmu. meskipun sedikit gila hehe</p>
+        </footer>
+    </div>
+
+    <script>
+        // --- Logika untuk Animasi Kelopak Bunga di Canvas ---
+        const canvas = document.getElementById('petal-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let petals = [];
+        const numberOfPetals = 50;
+        const bluebellColor = 'rgba(162, 162, 208, 0.7)'; // Warna Bluebell dengan sedikit transparansi
+
+        // Fungsi untuk membuat satu kelopak
+        function createPetal() {
+            return {
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height * 2 - canvas.height, // Mulai dari atas layar
+                size: Math.random() * 5 + 3,
+                speed: Math.random() * 2 + 1,
+                opacity: Math.random() * 0.5 + 0.3,
+                sway: Math.random() * 2 - 1
+            };
+        }
+
+        // Inisialisasi semua kelopak
+        for (let i = 0; i < numberOfPetals; i++) {
+            petals.push(createPetal());
+        }
+
+        // Fungsi untuk menggambar kelopak
+        function drawPetal(petal) {
+            ctx.beginPath();
+            ctx.fillStyle = `rgba(162, 162, 208, ${petal.opacity})`;
+            // Membuat bentuk elips sederhana untuk kelopak
+            ctx.ellipse(petal.x, petal.y, petal.size, petal.size * 1.5, Math.PI / 4, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        // Fungsi untuk mengupdate posisi kelopak
+        function updatePetals() {
+            for (let i = 0; i < petals.length; i++) {
+                let petal = petals[i];
+                petal.y += petal.speed;
+                petal.x += Math.sin(petal.y / 50) * petal.sway; // Efek melayang
+
+                // Jika kelopak jatuh ke bawah, reset posisinya ke atas
+                if (petal.y > canvas.height) {
+                    petals[i] = createPetal();
+                    petals[i].y = -20; // Mulai sedikit di atas layar
+                }
+            }
+        }
+        
+        // Loop animasi utama
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < petals.length; i++) {
+                drawPetal(petals[i]);
+            }
+            updatePetals();
+            requestAnimationFrame(animate);
+        }
+
+        // Menyesuaikan ukuran canvas jika jendela browser diubah
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+
+        // Memulai animasi
+        animate();
+
+
+        // --- Logika untuk Interaktivitas Halaman ---
+        const revealButton = document.getElementById('reveal-button');
+        const surpriseContent = document.getElementById('surprise-content');
+        const playlistSection = document.getElementById('playlist-section');
+        const readLetterButton = document.getElementById('read-letter-button');
+        const letterContent = document.getElementById('letter-content');
+
+        // Event listener untuk tombol utama
+        revealButton.addEventListener('click', () => {
+            surpriseContent.style.display = 'block'; // Tampilkan konten kejutan
+            revealButton.style.display = 'none'; // Sembunyikan tombol utama
+            
+            // Scroll ke bagian playlist dengan lembut
+            playlistSection.scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Event listener untuk tombol "Baca Surat"
+        readLetterButton.addEventListener('click', () => {
+            letterContent.classList.toggle('open');
+            if (letterContent.classList.contains('open')) {
+                readLetterButton.textContent = 'Tutup Surat';
+            } else {
+                readLetterButton.textContent = 'Baca Surat';
+            }
+        });
+
+    </script>
+</body>
+</html>
