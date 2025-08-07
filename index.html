@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For u Asteria</title>
     
-    <!-- Google Fonts: Montserrat untuk Judul, Lora untuk Teks -->
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
-        /* --- Palet Warna & Konfigurasi Dasar --- */
+        
         :root {
             --bluebell: #A2A2D0;
             --cream: #F5F5DC;
@@ -22,7 +22,7 @@
             --font-body: 'Lora', serif;
         }
 
-        /* --- Reset & Gaya Global --- */
+        
         * {
             margin: 0;
             padding: 0;
@@ -37,21 +37,21 @@
             background-color: var(--cream);
             font-family: var(--font-body);
             color: var(--dark-gray);
-            overflow-x: hidden; /* Mencegah scroll horizontal */
+            overflow-x: hidden; 
         }
 
-        /* --- Latar Belakang Animasi Kelopak Bunga --- */
+        
         #petal-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: -1; /* Pastikan canvas ada di belakang konten */
-            pointer-events: none; /* Agar tidak bisa diklik */
+            z-index: -1; 
+            pointer-events: none; 
         }
 
-        /* --- Kontainer Utama --- */
+        
         .container {
             max-width: 800px;
             margin: 0 auto;
@@ -59,7 +59,7 @@
             text-align: center;
         }
 
-        /* --- Halaman Pembuka (Hero Section) --- */
+        
         .hero-section {
             min-height: 100vh;
             display: flex;
@@ -93,12 +93,12 @@
             background-color: #f7e26b;
         }
 
-        /* --- Wrapper untuk Konten Kejutan --- */
+        
         #surprise-content {
-            display: none; /* Awalnya disembunyikan */
+            display: none; 
         }
 
-        /* --- Gaya Umum untuk Setiap Bagian --- */
+        
         .content-section {
             background-color: var(--white);
             padding: 60px 40px;
@@ -117,14 +117,14 @@
             color: var(--bluebell);
         }
 
-        /* --- Playlist Lagu Spesial --- */
+        
         #playlist-section {
             animation-delay: 0.2s;
         }
         .music-player-wrapper {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* Aspect Ratio 16:9 */
+            padding-top: 56.25%; 
             border-radius: 15px;
             overflow: hidden;
         }
@@ -137,7 +137,7 @@
             border: none;
         }
 
-        /* --- Pesan Personal (Surat Digital) --- */
+        
         #letter-section {
             animation-delay: 0.4s;
         }
@@ -151,7 +151,7 @@
             font-size: 1.1rem;
         }
         .letter-content.open {
-            max-height: 1000px; /* Nilai besar agar konten muat */
+            max-height: 1000px; 
             opacity: 1;
         }
         .letter-button {
@@ -163,7 +163,7 @@
              background-color: #b9b9e0;
         }
 
-        /* --- Halaman Penutup (Footer) --- */
+        
         footer {
             padding: 40px 20px;
             font-size: 1rem;
@@ -176,7 +176,7 @@
             animation: pulse 1.5s infinite;
         }
 
-        /* --- Animasi --- */
+        
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
@@ -199,7 +199,7 @@
             100% { transform: scale(1); }
         }
 
-        /* --- Aturan Responsif untuk Mobile --- */
+        
         @media (max-width: 768px) {
             .hero-section h1 {
                 font-size: 2.5rem;
@@ -218,48 +218,36 @@
 </head>
 <body>
 
-    <!-- Canvas untuk animasi kelopak bunga yang jatuh -->
+    
     <canvas id="petal-canvas"></canvas>
 
     <div class="container">
-        <!-- 1. Halaman Pembuka (Hero Section) -->
+        
         <section class="hero-section" id="hero">
             <!-- 
-                UBAH NAMA DI SINI: 
-                Ganti "[Nama Penerima]" dengan nama orang yang berulang tahun.
+                
             -->
             <h1>Selamat Ulang Tahun, <br>Savina!</h1>
             
             <button class="cta-button" id="reveal-button">Pencet ini Kak</button>
         </section>
 
-        <!-- Wrapper untuk semua konten kejutan -->
+        
         <div id="surprise-content">
-            <!-- 2. Playlist Lagu Spesial -->
+            
             <section class="content-section" id="playlist-section">
                 <h2>Playlist Spesial Untukmu</h2>
                 <div class="music-player-wrapper">
-                    <!-- 
-                        UBAH LINK PLAYLIST DI SINI:
-                        - Buka YouTube atau Spotify.
-                        - Cari playlist yang Anda inginkan.
-                        - Klik "Share" -> "Embed".
-                        - Salin kode `iframe` dan tempel di sini, atau cukup ganti URL di dalam `src="..."` di bawah ini.
-                        - Contoh di bawah ini menggunakan video lofi.
-                    -->
+                    
                     <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/22Nd3GuO7sHopPjdKccRcq?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
                 </div>
             </section>
 
-            <!-- 3. Pesan Personal dari Anda -->
+            
             <section class="content-section" id="letter-section">
                 <h2>Sebuah Surat untukmu, Asteria</h2>
                 <div class="letter-content" id="letter-content">
-                    <!-- 
-                        UBAH ISI SURAT DI SINI:
-                        Tulis pesan tulus Anda di antara tag <p> di bawah ini.
-                        Anda bisa menambahkan beberapa paragraf dengan tag <p> baru.
-                    -->
+                    
                     <p>
                         Hai Savina,
                     </p>
@@ -284,14 +272,14 @@ Dan Aku akan selalu mencintainya.</p>
             </section>
         </div>
 
-        <!-- 4. Halaman Penutup (Footer) -->
+      
         <footer>
             <p>Dibuat dengan <span class="heart-icon">❤️</span> untukmu. meskipun sedikit gila hehe</p>
         </footer>
     </div>
 
     <script>
-        // --- Logika untuk Animasi Kelopak Bunga di Canvas ---
+        
         const canvas = document.getElementById('petal-canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -299,13 +287,13 @@ Dan Aku akan selalu mencintainya.</p>
 
         let petals = [];
         const numberOfPetals = 50;
-        const bluebellColor = 'rgba(162, 162, 208, 0.7)'; // Warna Bluebell dengan sedikit transparansi
+        const bluebellColor = 'rgba(162, 162, 208, 0.7)'; 
 
-        // Fungsi untuk membuat satu kelopak
+        
         function createPetal() {
             return {
                 x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height * 2 - canvas.height, // Mulai dari atas layar
+                y: Math.random() * canvas.height * 2 - canvas.height, 
                 size: Math.random() * 5 + 3,
                 speed: Math.random() * 2 + 1,
                 opacity: Math.random() * 0.5 + 0.3,
@@ -313,36 +301,36 @@ Dan Aku akan selalu mencintainya.</p>
             };
         }
 
-        // Inisialisasi semua kelopak
+        
         for (let i = 0; i < numberOfPetals; i++) {
             petals.push(createPetal());
         }
 
-        // Fungsi untuk menggambar kelopak
+        
         function drawPetal(petal) {
             ctx.beginPath();
             ctx.fillStyle = `rgba(162, 162, 208, ${petal.opacity})`;
-            // Membuat bentuk elips sederhana untuk kelopak
+            
             ctx.ellipse(petal.x, petal.y, petal.size, petal.size * 1.5, Math.PI / 4, 0, 2 * Math.PI);
             ctx.fill();
         }
 
-        // Fungsi untuk mengupdate posisi kelopak
+        
         function updatePetals() {
             for (let i = 0; i < petals.length; i++) {
                 let petal = petals[i];
                 petal.y += petal.speed;
-                petal.x += Math.sin(petal.y / 50) * petal.sway; // Efek melayang
+                petal.x += Math.sin(petal.y / 50) * petal.sway; 
 
-                // Jika kelopak jatuh ke bawah, reset posisinya ke atas
+                
                 if (petal.y > canvas.height) {
                     petals[i] = createPetal();
-                    petals[i].y = -20; // Mulai sedikit di atas layar
+                    petals[i].y = -20; 
                 }
             }
         }
         
-        // Loop animasi utama
+        
         function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < petals.length; i++) {
@@ -352,33 +340,33 @@ Dan Aku akan selalu mencintainya.</p>
             requestAnimationFrame(animate);
         }
 
-        // Menyesuaikan ukuran canvas jika jendela browser diubah
+        
         window.addEventListener('resize', () => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
 
-        // Memulai animasi
+        
         animate();
 
 
-        // --- Logika untuk Interaktivitas Halaman ---
+        
         const revealButton = document.getElementById('reveal-button');
         const surpriseContent = document.getElementById('surprise-content');
         const playlistSection = document.getElementById('playlist-section');
         const readLetterButton = document.getElementById('read-letter-button');
         const letterContent = document.getElementById('letter-content');
 
-        // Event listener untuk tombol utama
+       
         revealButton.addEventListener('click', () => {
-            surpriseContent.style.display = 'block'; // Tampilkan konten kejutan
-            revealButton.style.display = 'none'; // Sembunyikan tombol utama
+            surpriseContent.style.display = 'block'; 
+            revealButton.style.display = 'none'; 
             
-            // Scroll ke bagian playlist dengan lembut
+           
             playlistSection.scrollIntoView({ behavior: 'smooth' });
         });
 
-        // Event listener untuk tombol "Baca Surat"
+        
         readLetterButton.addEventListener('click', () => {
             letterContent.classList.toggle('open');
             if (letterContent.classList.contains('open')) {
